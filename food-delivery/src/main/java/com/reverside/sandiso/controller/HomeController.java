@@ -48,7 +48,7 @@ public class HomeController {
 			Set<UserRole> userRoles = new HashSet<>();
 			userRoles.add(new UserRole(user, roleRepository.findByName("ROLE_USER")));
 			userService.createUser(user, userRoles);
-			return "redirect:/";
+			return "redirect:/fooddelivery";
 		}
 	}
 	
