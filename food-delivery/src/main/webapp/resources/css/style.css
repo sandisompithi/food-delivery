@@ -1,0 +1,66 @@
+body {
+  margin: 0;
+}
+nav {
+  width: 100vw;
+  background-color: #d6efff;
+}
+ul {
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+li {
+  list-style-type: none;
+  margin: 0 2vw;
+  font-size: 3vh;
+}
+a {
+  text-decoration: none;
+  color: black;
+  padding: 2vw;
+  font-family: monospace;
+  float: left;
+}
+a:hover {
+  background-color: #c6e9ff;
+}
+button {
+  display: none;
+}
+
+@media only screen and (max-width: 500px) {
+  /*shows elements in a column*/
+  ul {
+    flex-direction: column;
+  }
+
+  /* deletes margin on top or bottom of the a tag*/
+  li {
+    margin: 0;
+  }
+
+  /* makes sure that a tag will take the entire screen*/
+  a {
+    display: block;
+  }
+
+  button {
+    /*makes the visible*/
+    display: block;
+
+    /*since we are here, we can style it a little bit!*/
+    padding: 2vw;
+    font-size: 3vh;
+    background-color: #afe0ff;
+    border: none;
+
+    /*outline none removes the default blue border that appears anytime you click on the button*/
+    outline: none;
+
+    cursor: pointer;
+
+    /*this put the button on the left*/
+    align-self: flex-start;
+  }
+}
