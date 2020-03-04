@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
 
 import com.reverside.sandiso.model.User;
 import com.reverside.sandiso.model.security.UserRole;
@@ -14,6 +15,7 @@ import com.reverside.sandiso.repository.RoleRepository;
 import com.reverside.sandiso.repository.UserRepository;
 import com.reverside.sandiso.service.UserService;
 
+@Service
 public class UserServiceImpl implements UserService {
 	
 	private static final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
