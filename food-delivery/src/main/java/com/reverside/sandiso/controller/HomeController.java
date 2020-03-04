@@ -25,14 +25,10 @@ public class HomeController {
 	@Autowired
 	private RoleRepository roleRepository;
 	
-	@GetMapping(value = "/")
-	public String home() {
-		return "redirect:/index";
-	}
 	
-	@GetMapping(value = "/index")
-	public String index() {
-		return "index";
+	@GetMapping(value = { "/", "/fooddelivery"})
+	public String fooddelivery(Model model) {
+		return "fooddelivery";
 	}
 	
 	@GetMapping(value = "/signup")
@@ -55,6 +51,17 @@ public class HomeController {
 			return "redirect:/";
 		}
 	}
+	
+	@GetMapping(value = "/login")
+    public String login(Model model, String error, String logout) {
+        if (error != null)
+            model.addAttribute("error", "Your username and password is invalid.");
+
+        if (logout != null)
+            model.addAttribute("message", "You have been logged out successfully.");
+
+        return "login";
+    }
 	
 	@GetMapping(value = "/fooddelivery")
 	public String foodDelivery(Principal principal, Model model) {
