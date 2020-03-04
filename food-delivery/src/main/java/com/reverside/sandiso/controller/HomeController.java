@@ -25,24 +25,24 @@ public class HomeController {
 	@Autowired
 	private RoleRepository roleRepository;
 	
-	@GetMapping("/")
+	@GetMapping(value = "/")
 	public String home() {
 		return "redirect:/index";
 	}
 	
-	@GetMapping("/index")
+	@GetMapping(value = "/index")
 	public String index() {
 		return "index";
 	}
 	
-	@GetMapping("/signup")
+	@GetMapping(value = "/signup")
 	public String signup(Model model) {
 		User user = new User();
 		model.addAttribute("user", user);
 		return "signup";
 	}
 	
-	@PostMapping("/signup")
+	@PostMapping(value = "/signup")
 	public String signup(@ModelAttribute("user") User user, Model model) {
 		
 		if (userService.checkUserExists(user.getUsername())) {
@@ -56,7 +56,7 @@ public class HomeController {
 		}
 	}
 	
-	@GetMapping("/fooddelivery")
+	@GetMapping(value = "/fooddelivery")
 	public String foodDelivery(Principal principal, Model model) {
 		User user = userService.findByUsername(principal.getName());
 		model.addAttribute("user", user);

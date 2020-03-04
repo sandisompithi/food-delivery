@@ -20,7 +20,7 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
-	@GetMapping("/profile")
+	@GetMapping(value = "/profile")
 	public String profile(Principal principal, Model model) {
 		
 		User user = userService.findByUsername(principal.getName());
@@ -30,7 +30,7 @@ public class UserController {
 		return "profile";
 	}
 	
-	@PostMapping("/profile")
+	@PostMapping(value = "/profile")
 	public String profilePost(@ModelAttribute("user") User newUser, Model model) {
 		
 		User user = userService.findByUsername(newUser.getUsername());
