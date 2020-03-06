@@ -1,31 +1,27 @@
 package com.reverside.sandiso.model;
 
-import java.net.URI;
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.reverside.sandiso.model.security.Authority;
-import com.reverside.sandiso.model.security.UserRole;
 
 @Entity
 @Table(name = "customer")
 public class User implements UserDetails {
-	
+
+	public static enum Role { USER }
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "userId", nullable = false, updatable = false)
@@ -38,12 +34,8 @@ public class User implements UserDetails {
 	private String cellphone;
 	private String password;
 	private boolean enabled = true;
-	
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JsonIgnore
-    private Set<UserRole> userRoles = new HashSet<>();
+	private String  role;
 
-	
 	public Long getId() {
 		return id;
 	}
@@ -68,10 +60,6 @@ public class User implements UserDetails {
 		this.surname = surname;
 	}
 
-	public String getUsername() {
-		return username;
-	}
-
 	public void setUsername(String username) {
 		this.username = username;
 	}
@@ -84,59 +72,66 @@ public class User implements UserDetails {
 		this.cellphone = cellphone;
 	}
 
-	public String getPassword() {
-		return password;
-	}
-
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
-	public Set<UserRole> getUserRoles() {
-		return userRoles;
+	public String getRole() {
+		return role;
 	}
 
-	public void setUserRoles(Set<UserRole> userRoles) {
-		this.userRoles = userRoles;
+	public void setRole(String role) {
+		this.role = role;
+	}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+
+		Collection<GrantedAuthority> authorities = new ArrayList<>();
+		authorities.add(new SimpleGrantedAuthority(role));
+		return authorities;
+
+	}
+
+	@Override
+	public String getPassword() {
+		return password;
+	}
+
+	@Override
+	public String getUsername() {
+		return username;
+	}
+
+	@JsonIgnore
+	@Override
+	public boolean isAccountNonExpired() {
+		return true;
+	}
+
+	@JsonIgnore
+	@Override
+	public boolean isAccountNonLocked() {
+		return true;
+	}
+
+	@JsonIgnore
+	@Override
+	public boolean isCredentialsNonExpired() {
+		return true;
 	}
 
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
-
-	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities() {
-		Set<GrantedAuthority> authorities = new HashSet<>();
-		userRoles.forEach(ur -> authorities.add(new Authority(ur.getRole().getName())));
-		return authorities;
-	}
-
-	@Override
-	public boolean isAccountNonExpired() {
-		// TODO Auto-generated method stub
-		return true;
-	}
-
-	@Override
-	public boolean isAccountNonLocked() {
-		// TODO Auto-generated method stub
-		return true;
-	}
-
-	@Override
-	public boolean isCredentialsNonExpired() {
-		// TODO Auto-generated method stub
-		return true;
-	}
-
 	@Override
 	public boolean isEnabled() {
 		// TODO Auto-generated method stub
 		return enabled;
 	}
 
-	
-	
-	
+
+
+
 
 }

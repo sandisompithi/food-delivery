@@ -1,8 +1,8 @@
 package com.reverside.sandiso.service.impl;
 
 import java.util.List;
-import java.util.Set;
 
+import com.reverside.sandiso.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +10,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.reverside.sandiso.model.User;
-import com.reverside.sandiso.model.security.UserRole;
-import com.reverside.sandiso.repository.RoleRepository;
-import com.reverside.sandiso.repository.UserRepository;
 import com.reverside.sandiso.service.UserService;
 
 @Service
@@ -22,9 +19,6 @@ public class UserServiceImpl implements UserService {
 	
 	@Autowired
 	private UserRepository userRepository;
-	
-	@Autowired
-	private RoleRepository roleRepository;
 	
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
@@ -48,7 +42,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User createUser(User user, Set<UserRole> userRoles) {
+	public User createUser(User user) {
 		
 		User localUser = userRepository.findByUsername(user.getSurname());
 		
@@ -57,12 +51,6 @@ public class UserServiceImpl implements UserService {
 		} else {
 			String encryptedPasswordString = passwordEncoder.encode(user.getPassword());
 			user.setPassword(encryptedPasswordString);
-			
-			for (UserRole userRole : userRoles) {
-				roleRepository.save(userRole.getRole());
-			}
-			
-			user.getUserRoles().addAll(userRoles);
 			
 			localUser = userRepository.save(user);
 		}

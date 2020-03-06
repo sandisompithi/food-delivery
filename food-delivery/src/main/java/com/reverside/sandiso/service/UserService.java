@@ -1,10 +1,8 @@
 package com.reverside.sandiso.service;
 
 import java.util.List;
-import java.util.Set;
 
 import com.reverside.sandiso.model.User;
-import com.reverside.sandiso.model.security.UserRole;
 
 public interface UserService {
 
@@ -13,7 +11,7 @@ public interface UserService {
 	boolean checkUserExists(String username);
 	
 	void save(User user);
-	User createUser(User user, Set<UserRole> userRoles);
+	User createUser(User user);
 	User saveUser(User user);
 	
 	List<User> findUsersList();
