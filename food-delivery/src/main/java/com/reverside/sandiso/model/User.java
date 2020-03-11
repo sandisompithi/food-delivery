@@ -2,13 +2,9 @@ package com.reverside.sandiso.model;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -17,7 +13,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "customer")
 public class User implements UserDetails {
 
 	public static enum Role { USER }
@@ -33,6 +28,10 @@ public class User implements UserDetails {
 	private String username;
 	private String cellphone;
 	private String password;
+
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<DeliveryAddress> addressList;
+
 	private boolean enabled = true;
 	private String  role;
 
@@ -74,6 +73,14 @@ public class User implements UserDetails {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public List<DeliveryAddress> getAddressList() {
+		return addressList;
+	}
+
+	public void setAddressList(List<DeliveryAddress> addressList) {
+		this.addressList = addressList;
 	}
 
 	public String getRole() {

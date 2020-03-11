@@ -3,45 +3,47 @@
 <head th:replace="common/header :: common-header"/>
 <body roleId="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
 <head th:replace="common/header :: navbar"/>
-<div class="container main">
-    <form name="addLocation" method="POST" action="addLocation.htm" commandName="location" onsubmit="changeAdress()">
-        <table>
-            <tr>
-                <td>Name</td>
-                <td><input type="text" name="name"/></td>
-            </tr>
-            <tr>
-                <td>Adres</td>
-                <td><input type="text" id="adress" name="adress"/></td>
-            </tr>
-            <tr>
-                <td><input type="text" id="geolocation" name="geolocation"/></td>
-            </tr>
-        </table>
-        <input type="hidden" name="id" value="${location.id}"/>
-        <input type="submit" name="action" value="Save"/>
-        <input type="submit" name="action" value="Cancel"/>
-    </form>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h3>Delivery Address Information</h3>
+            <form th:action="@{/deliveryAddress}" method="post">
+                <input type="hidden" name="id" th:value="${deliveryAddress.id}" />
+
+                <div class="form-group">
+                    <label for="streetName">Street Name</label>
+                    <input type="text" class="form-control" th:value="${deliveryAddress.streetName}" name="streetName"
+                           id="streetName" placeholder="Street name"/>
+                </div>
+                <div class="form-group">
+                    <label for="suburb">Suburb</label>
+                    <input type="text" class="form-control" th:value="${deliveryAddress.suburb}" name="suburb"
+                           id="suburb" placeholder="Suburb"/>
+                </div>
+                <div class="form-group">
+                    <label for="city">City</label>
+                    <input type="text" class="form-control" th:value="${deliveryAddress.city}" name="city"
+                           id="city" placeholder="City"/>
+                </div>
+                <div class="form-group">
+                    <label for="postalCode">Postal Code</label>
+                    <input type="text" class="form-control" th:value="${deliveryAddress.postalCode}" name="postalCode"
+                           id="postalCode" placeholder="Postal Code"/>
+                </div>
+
+                <input type="hidden"
+                       name="${_csrf.parameterName}"
+                       value="${_csrf.token}"/>
+
+                <button class="btn btn-primary" type="submit">Find Address</button>
+            </form>
+
+            <div class="col-md-6">
+            </div>
+        </div>
+    </div>
 </div>
-
-
 <div th:replace="common/header :: body-bottom-scripts"/>
 
 </body>
-<script type="text/javascript">
-    function changeAddress() {
-        var adres = document.getElementById("adress).value;
-        var geocoder = new google.maps.Geocoder();
-        geocoder.geocode({ 'address': adres}, function(result, status) {
-            if (status == google.mapsGeocoderStatus.OK) {
-                var latitude = results[0].geometry.location.lat();
-                var longitude = results[0].geometry.location.lng();
-                document.addLocation.geolocation.value = latitude + " " + longitude;
-                alert(document.getElementId("geolocation").value);
-                document.addLocation.submit();
-            } else alert("geocode failed:" + status);
-        });
-        return false;
-    }
-</script>
 </html>
