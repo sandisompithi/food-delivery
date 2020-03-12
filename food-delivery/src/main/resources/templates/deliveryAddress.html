@@ -4,13 +4,31 @@
 <body roleId="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
 <head th:replace="common/header :: navbar"/>
 <div class="container">
-    <div class="row">
-        <div class="col-md-6">
-            <h1 style="color: red;">Restaurants</h1>
-            <h1 style="color: red;">Under Construction...</h1>
-            <h1 style="color: red;">Get the restaurant of the nearby suburb</h1>
-        </div>
-    </div>
+    <main>
+        <section class="cards">
+            <article>
+                <img class="article-img" src="/images/restaurants/mcdonald-century.png" alt=" " />
+            </article>
+            <article>
+                <img class="article-img" src="/images/restaurants/cinnabon-century.png" alt=" " />
+            </article>
+            <article>
+                <img class="article-img" src="/images/restaurants/kfc-century.png" alt=" " />
+                <h1 class="article-title">
+                    Title of article
+                </h1>
+            </article>
+            <article>
+                <img class="article-img" src="/images/restaurants/kfc-milnerton.png" alt=" " />
+            </article>
+            <article>
+                <img class="article-img" src="/images/restaurants/brocka-century.png" alt=" " />
+            </article>
+            <article>
+                <img class="article-img" src="/images/restaurants/spur-milneton.png" alt=" " />
+            </article>
+        </section>
+    </main>
 </div>
 <div th:replace="common/header :: body-bottom-scripts"/>
 
