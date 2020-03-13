@@ -4,6 +4,7 @@ import java.security.Principal;
 import java.util.List;
 
 import com.reverside.sandiso.model.DeliveryAddress;
+import com.reverside.sandiso.model.Restaurants;
 import com.reverside.sandiso.model.User;
 
 import org.dom4j.CDATA;
@@ -13,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import com.reverside.sandiso.service.DeliveryAddressService;
+import com.reverside.sandiso.service.RestaurantService;
 import com.reverside.sandiso.service.UserService;
 
 @Controller
@@ -23,6 +25,9 @@ public class HomeController {
 	
 	@Autowired
 	private DeliveryAddressService addressService;
+	
+	@Autowired 
+	private RestaurantService restaurantService;
 
 	@RequestMapping("/")
 	public String home() {
@@ -85,6 +90,9 @@ public class HomeController {
 
 		List<DeliveryAddress> addressList = addressService.findDeliveryAddressList(principal);
 		model.addAttribute("addressList", addressList);
+		
+		List<Restaurants> restaurantList = restaurantService.findRestaurants(principal.getName());
+		model.addAttribute("restaurantList", restaurantList);
 
 		return "deliveryAddress";
 	}
