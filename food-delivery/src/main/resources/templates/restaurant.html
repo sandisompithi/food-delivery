@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="common/header :: common-header"/>
+<body roleId="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
+<head th:replace="common/header :: navbar"/>
+<div class="container">
+    <h1>Add Restaurant</h1>
+    <div class="row">
+        <div class="col-md-6">
+            <form th:action="@{/admin/restaurant}" method="post">
+                <input type="hidden" name="id" th:value="${restaurants.id}" />
+                <div class="form-group">
+                    <label for="name">Restaurant Name</label>
+                    <input type="text" class="form-control" th:value="${restaurants.name}" name="name"
+                           id="name" placeholder="Restaurant name"/>
+                </div>
+                <div class="form-group">
+                    <label for="city">City</label>
+                    <input type="text" class="form-control" th:value="${restaurants.city}" name="city"
+                           id="city" placeholder="City"/>
+                </div>
+                <input type="hidden"
+                       name="${_csrf.parameterName}"
+                       value="${_csrf.token}"/>
+
+                <button class="btn btn-primary" type="submit">Add</button>
+            </form>
+            <div class="col-md-6">
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="common/header :: body-bottom-scripts"/>
+
+</body>
+</html>

@@ -8,6 +8,6 @@ import com.reverside.sandiso.model.Restaurants;
 
 public interface RestaurantService {
 	Restaurants saveRestaurant(Restaurants restaurants);
-	List<Restaurants> findRestaurants(String address);
+	List<Restaurants> findRestaurants();
 	Restaurants findRestaurant(String name);
 }

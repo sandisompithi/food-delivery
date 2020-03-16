@@ -29,7 +29,7 @@ public class HomeController {
 	@Autowired 
 	private RestaurantService restaurantService;
 
-	@RequestMapping("/")
+	@GetMapping(value = "/")
 	public String home() {
 		return "redirect:/index";
 	}
@@ -39,7 +39,7 @@ public class HomeController {
 		return "index";
 	}
 
-	@RequestMapping(value = "/signup", method = RequestMethod.GET)
+	@GetMapping(value = "/signup")
 	public String signup(Model model) {
 		User user = new User();
 
@@ -48,7 +48,7 @@ public class HomeController {
 		return "signup";
 	}
 
-	@RequestMapping(value = "/signup", method = RequestMethod.POST)
+	@PostMapping(value = "/signup")
 	public String signupPost(@ModelAttribute("user") User user, Model model) {
 
 		if (userService.checkUserExists(user.getUsername())) {
@@ -62,7 +62,7 @@ public class HomeController {
 		}
 	}
 
-	@RequestMapping("/fooddelivery")
+	@GetMapping(value = "/fooddelivery")
 	public String userFront(Principal principal, Model model) {
 		User user = userService.findByUsername(principal.getName());
 
@@ -91,9 +91,28 @@ public class HomeController {
 		List<DeliveryAddress> addressList = addressService.findDeliveryAddressList(principal);
 		model.addAttribute("addressList", addressList);
 		
-		List<Restaurants> restaurantList = restaurantService.findRestaurants(principal.getName());
+		List<Restaurants> restaurantList = restaurantService.findRestaurants();
 		model.addAttribute("restaurantList", restaurantList);
 
 		return "deliveryAddress";
 	}
+
+    @GetMapping(value = "/admin/restaurant")
+    public String restaurant(Model model, Principal principal) {
+        User user = userService.findByUsername(principal.getName());
+        model.addAttribute("user", user);
+
+        Restaurants restaurants = new Restaurants();
+        model.addAttribute("restaurants", restaurants);
+
+        return "restaurant";
+    }
+
+    @PostMapping(value = "/admin/restaurant")
+    public String restaurantPost(@ModelAttribute("restaurant") Restaurants restaurants, Principal principal) {
+        User user = userService.findByUsername(principal.getName());
+		restaurants.setUser(user);
+        restaurantService.saveRestaurant(restaurants);
+        return "redirect:/admin/restaurant";
+    }
 }

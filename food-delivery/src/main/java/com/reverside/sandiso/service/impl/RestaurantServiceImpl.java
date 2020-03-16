@@ -27,32 +27,9 @@ public class RestaurantServiceImpl implements RestaurantService {
 	}
 
 	@Override
-	public List<Restaurants> findRestaurants(String address) {
+	public List<Restaurants> findRestaurants() {
 
-		DeliveryAddress suburb = addressService.findDeliveryAddressBySuburb(address);
-				
-		if (suburb.getSuburb().equalsIgnoreCase("Century City")) {
-			
-			List<Restaurants> restaurantsList = restaurantRepository.findAll();
-			
-			return restaurantsList;
-			
-		} else if (suburb.getSuburb().equalsIgnoreCase("Cape Town")) {
-			
-			List<Restaurants> restaurantsList = restaurantRepository.findAll();
-			
-			return restaurantsList;
-			
-		} else if (suburb.getSuburb().equalsIgnoreCase("Khayelitsha")) {
-			
-			List<Restaurants> restaurantsList = restaurantRepository.findAll();
-			
-			return restaurantsList;
-			
-		} else {
-			
-			return null;
-		}
+		return restaurantRepository.findAll();
 	}
 
 	@Override

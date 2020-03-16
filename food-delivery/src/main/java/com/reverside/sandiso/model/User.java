@@ -15,7 +15,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 public class User implements UserDetails {
 
-	public static enum Role { USER }
+	private static final long serialVersionUID = 1L;
+	
+	public static enum Role { USER, ADMIN }
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -31,6 +33,9 @@ public class User implements UserDetails {
 
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<DeliveryAddress> addressList;
+	
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Restaurants> restaurantsList;
 
 	private boolean enabled = true;
 	private String  role;
@@ -81,6 +86,14 @@ public class User implements UserDetails {
 
 	public void setAddressList(List<DeliveryAddress> addressList) {
 		this.addressList = addressList;
+	}
+	
+	public List<Restaurants> getRestaurantsList() {
+		return restaurantsList;
+	}
+
+	public void setRestaurantsList(List<Restaurants> restaurantsList) {
+		this.restaurantsList = restaurantsList;
 	}
 
 	public String getRole() {
