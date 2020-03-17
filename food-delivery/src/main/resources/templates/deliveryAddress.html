@@ -4,31 +4,25 @@
 <body roleId="page-top" data-spy="scroll" data-target=".navbar-fixed-top">
 <head th:replace="common/header :: navbar"/>
 <div class="container">
-    <main>
-        <section class="cards">
-            <article>
-                <img class="article-img" src="/images/restaurants/mcdonald-century.png" alt=" " />
-            </article>
-            <article>
-                <img class="article-img" src="/images/restaurants/cinnabon-century.png" alt=" " />
-            </article>
-            <article>
-                <img class="article-img" src="/images/restaurants/kfc-century.png" alt=" " />
-                <h1 class="article-title">
-                    Title of article
-                </h1>
-            </article>
-            <article>
-                <img class="article-img" src="/images/restaurants/kfc-milnerton.png" alt=" " />
-            </article>
-            <article>
-                <img class="article-img" src="/images/restaurants/brocka-century.png" alt=" " />
-            </article>
-            <article>
-                <img class="article-img" src="/images/restaurants/spur-milneton.png" alt=" " />
-            </article>
-        </section>
-    </main>
+	<div class="row">
+        <h3>List of Restaurants</h3>
+        <div class="table-responsive">
+            <table class="table table-borderd table-hover table-striped">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>City</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr data-th-each="eachRestaurant : ${restaurantsList}">
+                    <td data-th-text="${eachRestaurant.name}">...</td>
+                    <td data-th-text="${eachRestaurant.city}">...</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 <div th:replace="common/header :: body-bottom-scripts"/>
 
