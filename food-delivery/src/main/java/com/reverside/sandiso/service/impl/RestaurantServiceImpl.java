@@ -59,17 +59,18 @@ public class RestaurantServiceImpl implements RestaurantService {
 			//em.getTransaction().begin();
 
 			Query query = em.createQuery("Select " + "r.name, r.city " + "from DeliveryAddress d " +
-					"inner join Restaurants r on d.suburb = r.city");
+					"inner join Restaurants r on d.suburb = r.city " +
+					"inner join User u on d.user = u.id " +
+					"where u.id = " + user.getId());
 
 			@SuppressWarnings("unchecked")
-			List<Restaurants> list = query.getResultList();
+			List<Object[]> list = query.getResultList();
 
-
-			System.out.println("Restaurant Name:");
+			for (Object[] lst : list) {
+				System.out.println("Restaurant Name:" + lst[0] + " " + lst[1]);
+			}
 
 			em.close();
-
-			return list;
 		}
 		return null;
 	}

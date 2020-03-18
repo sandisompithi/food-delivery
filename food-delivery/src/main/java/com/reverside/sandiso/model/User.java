@@ -32,7 +32,7 @@ public class User implements UserDetails {
 	private String password;
 
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<DeliveryAddress> addressList;
+	private List<DeliveryAddress> addressList = new ArrayList<>();
 	
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Restaurants> restaurantsList;

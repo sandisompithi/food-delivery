@@ -91,8 +91,8 @@ public class HomeController {
 		List<DeliveryAddress> addressList = addressService.findDeliveryAddressList(principal);
 		model.addAttribute("addressList", addressList);
 		
-		List<Restaurants> restaurantList = restaurantService.getRestaurantBySuburb(principal.getName());
-		model.addAttribute("restaurantList", restaurantList);
+		List<Restaurants> restaurant = restaurantService.getRestaurantBySuburb(principal.getName());
+		model.addAttribute("restaurant", restaurant);
 
 		return "deliveryAddress";
 	}
