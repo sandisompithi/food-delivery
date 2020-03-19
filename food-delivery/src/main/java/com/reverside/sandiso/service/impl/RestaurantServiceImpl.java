@@ -61,7 +61,7 @@ public class RestaurantServiceImpl implements RestaurantService {
 			Query query = em.createQuery("Select " + "r.name, r.city " + "from DeliveryAddress d " +
 					"inner join Restaurants r on d.suburb = r.city " +
 					"inner join User u on d.user = u.id " +
-					"where u.id = " + user.getId());
+					"where u.id = " + user.getId() + " group by r.city " + "order by r.name");
 
 			@SuppressWarnings("unchecked")
 			List<Object[]> list = query.getResultList();
