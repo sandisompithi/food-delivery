@@ -48,9 +48,9 @@ public class RestaurantServiceImpl implements RestaurantService {
 	public Restaurants findRestaurant(String name) {
 		return restaurantRepository.findByName(name);
 	}
-
+	
 	@Override
-	public List<Restaurants> getRestaurantBySuburb(String username) {
+	public List<Object[]> getRestaurantBySuburb(String username) {
 		User user = userService.findByUsername(username);
 
 		if (user != null) {
@@ -58,21 +58,22 @@ public class RestaurantServiceImpl implements RestaurantService {
 
 			//em.getTransaction().begin();
 
-			Query query = em.createQuery("Select " + "r.name, r.city " + "from DeliveryAddress d " +
-					"inner join Restaurants r on d.suburb = r.city " +
-					"inner join User u on d.user = u.id " +
-					"where u.id = " + user.getId() + " group by r.city " + "order by r.name");
+			Query query = em.createQuery("Select r.name, r.city from Restaurants r " +
+					"join DeliveryAddress d on r.city = d.suburb " +
+					"join User u on d.user = u.id where u.id = " + user.getId() +
+					" group by r.name order by r.name");
 
-			@SuppressWarnings("unchecked")
 			List<Object[]> list = query.getResultList();
+			list.stream().collect(Collectors.toList());
 
 			for (Object[] lst : list) {
 				System.out.println("Restaurant Name:" + lst[0] + " " + lst[1]);
 			}
-
 			em.close();
+			return list;
+		} else {
+			return null;
 		}
-		return null;
 	}
 
 }

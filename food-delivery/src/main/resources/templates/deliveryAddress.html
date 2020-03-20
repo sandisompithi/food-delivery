@@ -5,10 +5,10 @@
 <head th:replace="common/header :: navbar"/>
 <div class="container">
 	<div class="row">
-        <article th:each="restaurant : ${restaurantsList}">
+        <article>
             <h1 class="article-title">
-                <span th:text="restaurant.name">...</span>
-                <span th:text="restaurant.city">...</span>
+                <span th:text="${name}">...</span>
+                <span th:text="${city}">...</span>
             </h1>
         </article>
     </div>

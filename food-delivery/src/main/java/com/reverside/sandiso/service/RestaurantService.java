@@ -10,5 +10,5 @@ public interface RestaurantService {
 	Restaurants saveRestaurant(Restaurants restaurants);
 	List<Restaurants> findRestaurants(Principal principal);
 	Restaurants findRestaurant(String name);
-	List<Restaurants> getRestaurantBySuburb(String username);
+	List<Object[]> getRestaurantBySuburb(String username);
 }
