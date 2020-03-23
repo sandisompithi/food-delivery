@@ -26,6 +26,8 @@ public class Restaurants {
 	
 	private String city;
 	
+	private byte[] image;
+	
 	@OneToMany(mappedBy = "restaurants", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Item> items = new ArrayList<>();
 
@@ -58,6 +60,15 @@ public class Restaurants {
 		this.city = city;
 	}
 	
+	
+
+	public byte[] getImage() {
+		return image;
+	}
+
+	public void setImage(byte[] image) {
+		this.image = image;
+	}
 
 	public List<Item> getItems() {
 		return items;

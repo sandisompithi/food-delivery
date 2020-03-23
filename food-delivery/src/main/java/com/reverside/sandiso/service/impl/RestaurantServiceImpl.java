@@ -8,6 +8,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +21,8 @@ import com.reverside.sandiso.service.UserService;
 
 @Service
 public class RestaurantServiceImpl implements RestaurantService {
+	
+	 private static final Logger logger = LoggerFactory.getLogger(RestaurantServiceImpl.class);
 
 	@Autowired
 	private RestaurantRepository restaurantRepository;
@@ -31,7 +35,12 @@ public class RestaurantServiceImpl implements RestaurantService {
 	
 	@Override
 	public Restaurants saveRestaurant(Restaurants restaurants) {
-		return restaurantRepository.save(restaurants);
+		try {
+			return restaurantRepository.save(restaurants);
+		} catch (Exception e) {
+			logger.error("ERROR", e);
+			return null;
+		}
 	}
 
 	@Override

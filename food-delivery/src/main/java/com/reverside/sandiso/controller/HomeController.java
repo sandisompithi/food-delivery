@@ -8,10 +8,13 @@ import com.reverside.sandiso.model.Restaurants;
 import com.reverside.sandiso.model.User;
 
 import org.dom4j.CDATA;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.reverside.sandiso.service.DeliveryAddressService;
 import com.reverside.sandiso.service.RestaurantService;
@@ -19,6 +22,8 @@ import com.reverside.sandiso.service.UserService;
 
 @Controller
 public class HomeController {
+	
+	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
 	@Autowired
 	private UserService userService;
@@ -115,10 +120,26 @@ public class HomeController {
     }
 
     @PostMapping(value = "/admin/restaurant")
-    public String restaurantPost(@ModelAttribute("restaurant") Restaurants restaurants, Principal principal) {
+    public String restaurantPost(@ModelAttribute("restaurant") Restaurants restaurants, Principal principal,
+    								@RequestParam("name") String name, @RequestParam("file") MultipartFile file) {
+    	
         User user = userService.findByUsername(principal.getName());
-		restaurants.setUser(user);
-        restaurantService.saveRestaurant(restaurants);
-        return "redirect:/admin/restaurant";
+		
+        try {
+			logger.info("Name= ", name);
+			
+			byte[] image = file.getBytes();
+			
+			restaurants.setImage(image);
+			restaurants.setUser(user);
+	        restaurantService.saveRestaurant(restaurants);
+	        return "redirect:/admin/restaurant";
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			logger.error("ERROR", e);
+			return null;
+		}
+        
     }
 }
