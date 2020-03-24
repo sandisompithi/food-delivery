@@ -7,7 +7,6 @@ import com.reverside.sandiso.model.DeliveryAddress;
 import com.reverside.sandiso.model.Restaurants;
 import com.reverside.sandiso.model.User;
 
-import org.dom4j.CDATA;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -98,12 +97,7 @@ public class HomeController {
 		
 		List<Object[]> restaurantsList = restaurantService.getRestaurantBySuburb(principal.getName());
 
-		for (Object[] list : restaurantsList) {
-			final Object name = list[0];
-			final Object city = list[1];
-			model.addAttribute("name", name);
-			model.addAttribute("city", city);
-		}
+		model.addAttribute("restaurantsList", restaurantsList);
 
 		return "deliveryAddress";
 	}
