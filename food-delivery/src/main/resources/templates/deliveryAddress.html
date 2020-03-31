@@ -16,8 +16,9 @@
                 </thead>
                 <tbody>
                 <tr data-th-each="eachRestaurants : ${restaurantsList}">
-                    <td><a data-th-text="${eachRestaurants[0]}" th:href="@{/restaurant/products}">...</a></td>
-                    <td data-th-text="${eachRestaurants[1]}">...</td>
+                	<td data-th-text="${eachRestaurants[0]}"></td>
+                    <td><a data-th-text="${eachRestaurants[1]}" th:href="@{/restaurant/products}">...</a></td>
+                    <td data-th-text="${eachRestaurants[2]}">...</td>
                 </tr>
                 </tbody>
             </table>
