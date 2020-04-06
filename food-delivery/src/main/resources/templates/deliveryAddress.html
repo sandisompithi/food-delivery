@@ -5,8 +5,8 @@
 	data-target=".navbar-fixed-top">
 <head th:replace="common/header :: navbar" />
 <div class="container">
+	<h3>List of Restaurants</h3>
 	<div class="row">
-		<h3>List of Restaurants</h3>
 		
 		<div data-th-each="eachRestaurants : ${restaurantsList}">
 			<a data-th-text="${eachRestaurants[0]}" class="trigger_popup_fricc">...</a>
