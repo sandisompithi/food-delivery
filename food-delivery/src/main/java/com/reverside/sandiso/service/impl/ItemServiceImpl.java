@@ -33,17 +33,12 @@ public class ItemServiceImpl implements ItemService {
 
 	@Override
 	public Item findItemById(Long id) {
-		return itemRepository.findItemById(id);
+		return itemRepository.findItemByItemId(id);
 	}
 
-	@SuppressWarnings("unlikely-arg-type")
 	@Override
 	public void displayItemPerRestaurant() {
-		Restaurants restaurants = new Restaurants();
-		
-		if (restaurants.getItems().equals(restaurants.getId())) {
-			
-		}
+		 
 
 	}
 

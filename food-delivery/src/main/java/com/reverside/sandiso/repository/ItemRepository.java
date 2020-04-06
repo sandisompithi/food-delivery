@@ -9,5 +9,5 @@ import com.reverside.sandiso.model.Item;
 public interface ItemRepository extends JpaRepository<Item, Long>{
 
 	List<Item> findAll();
-	Item findItemById(Long id);
+	Item findItemByItemId(Long id);
 }
