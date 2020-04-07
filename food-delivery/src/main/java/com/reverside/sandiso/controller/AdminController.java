@@ -1,5 +1,8 @@
 package com.reverside.sandiso.controller;
 
+import java.security.Principal;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,7 +11,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.reverside.sandiso.model.Item;
+import com.reverside.sandiso.model.Restaurants;
 import com.reverside.sandiso.model.User;
+import com.reverside.sandiso.service.ItemService;
 import com.reverside.sandiso.service.RestaurantService;
 import com.reverside.sandiso.service.UserService;
 
@@ -18,6 +24,12 @@ public class AdminController {
  
 	@Autowired
 	private UserService userService;
+	
+	@Autowired 
+	private RestaurantService restaurantService;
+	
+	@Autowired
+	private ItemService itemService;
 	
 	@GetMapping(value = "/register")
     public String adminReg(Model model) {
@@ -40,5 +52,27 @@ public class AdminController {
 
             return "redirect:/";
         }
+    }
+    
+    @GetMapping(value = "/addItem")
+    public String addItem(Model model, Principal principal) {
+    	User user = userService.findByUsername(principal.getName());
+    	model.addAttribute("user", user);
+    	
+    	return "addItem";
+    }
+    
+    
+    @PostMapping(value = "/addItem/save")
+    public String addItemPost(@ModelAttribute("item") Item item, Principal principal, Model model) {
+    	
+    	User user = userService.findByUsername(principal.getName());
+    	List<Restaurants> restaurant = user.getRestaurantsList();
+    	for(Restaurants rest : restaurant) {
+    		item.setRestaurants(rest);
+    	}
+    	itemService.saveItem(item);
+    
+    	return "redirect:/";
     }
 }

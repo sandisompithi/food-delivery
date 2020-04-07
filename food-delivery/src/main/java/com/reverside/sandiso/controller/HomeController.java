@@ -130,7 +130,6 @@ public class HomeController {
 	        return "redirect:/admin/restaurant";
 			
 		} catch (Exception e) {
-			// TODO: handle exception
 			logger.error("ERROR", e);
 			return null;
 		}

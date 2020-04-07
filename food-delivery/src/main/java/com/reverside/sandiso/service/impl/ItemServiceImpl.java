@@ -8,9 +8,10 @@ import org.springframework.stereotype.Service;
 
 import com.reverside.sandiso.model.Item;
 import com.reverside.sandiso.model.Restaurants;
+import com.reverside.sandiso.model.User;
 import com.reverside.sandiso.repository.ItemRepository;
 import com.reverside.sandiso.service.ItemService;
-import com.reverside.sandiso.service.RestaurantService;
+import com.reverside.sandiso.service.UserService;
 
 @Service
 public class ItemServiceImpl implements ItemService {
@@ -18,8 +19,8 @@ public class ItemServiceImpl implements ItemService {
 	@Autowired
 	private ItemRepository itemRepository;
 	
-	@Autowired
-	private RestaurantService restaurantService;
+	@Autowired 
+	private UserService userService;
 
 	@Override
 	public Item saveItem(Item item) {
@@ -33,12 +34,42 @@ public class ItemServiceImpl implements ItemService {
 
 	@Override
 	public Item findItemById(Long id) {
-		return itemRepository.findItemByItemId(id);
+		return itemRepository.findByItemId(id);
 	}
 
 	@Override
-	public void displayItemPerRestaurant() {
+	public void displayItemPerRestaurant(Restaurants restaurants, Principal principal) {
+		 User user = userService.findByUsername(principal.getName());
 		 
+		 if (restaurants.getName().equalsIgnoreCase("KFC")) {
+			 List<Restaurants> restaurant = user.getRestaurantsList();
+			 for(Restaurants re : restaurant) {
+				 re.getItems();
+			 }
+			 
+			 itemRepository.saveAll(restaurant);
+		 } else if (restaurants.getName().equalsIgnoreCase("McDonalds")) {
+			 List<Restaurants> restaurant = user.getRestaurantsList();
+			 for(Restaurants re : restaurant) {
+				 re.getItems();
+			 }
+			 
+			 itemRepository.saveAll(restaurant);
+		 } else if (restaurants.getName().equalsIgnoreCase("Spur")) {
+			 List<Restaurants> restaurant = user.getRestaurantsList();
+			 for(Restaurants re : restaurant) {
+				 re.getItems();
+			 }
+			 
+			 itemRepository.saveAll(restaurant);
+		 } else if (restaurants.getName().equalsIgnoreCase("Brocka")) {
+			 List<Restaurants> restaurant = user.getRestaurantsList();
+			 for(Restaurants re : restaurant) {
+				 re.getItems();
+			 }
+			 
+			 itemRepository.saveAll(restaurant);
+		 }
 
 	}
 
