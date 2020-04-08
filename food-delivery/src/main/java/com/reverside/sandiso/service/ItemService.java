@@ -12,5 +12,5 @@ public interface ItemService {
 	List<Item> getAllItems();
 	Item findItemById(Long id);
 	
-	void displayItemPerRestaurant(Restaurants restaurants, Principal principal);
+	void displayItemPerRestaurant(List<Restaurants> restaurants, Principal principal);
 }

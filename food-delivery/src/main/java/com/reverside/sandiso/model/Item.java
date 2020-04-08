@@ -7,19 +7,23 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Item {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long itemId;
+	private String restaurantName;
 	private String itemName;
 	private Double price;
 	private int quantity;
 	
 	@ManyToOne
-	@JoinColumn(name = "id")
-	private Restaurants restaurants;
+	@JoinColumn(name = "user_id")
+	@JsonIgnore
+	private User user;
 	
 	public Long getItemId() {
 		return itemId;
@@ -27,6 +31,14 @@ public class Item {
 	public void setItemId(Long itemId) {
 		this.itemId = itemId;
 	}
+	
+	public String getRestaurantName() {
+		return restaurantName;
+	}
+	public void setRestaurantName(String restaurantName) {
+		this.restaurantName = restaurantName;
+	}
+	
 	public String getItemName() {
 		return itemName;
 	}
@@ -45,12 +57,11 @@ public class Item {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-	public Restaurants getRestaurants() {
-		return restaurants;
+	public User getUser() {
+		return user;
 	}
-	public void setRestaurants(Restaurants restaurants) {
-		this.restaurants = restaurants;
+	public void setUser(User user) {
+		this.user = user;
 	}
-	
 	
 }

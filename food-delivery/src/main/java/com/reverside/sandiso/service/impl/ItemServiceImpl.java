@@ -38,39 +38,9 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	@Override
-	public void displayItemPerRestaurant(Restaurants restaurants, Principal principal) {
+	public void displayItemPerRestaurant(List<Restaurants> restaurants, Principal principal) {
 		 User user = userService.findByUsername(principal.getName());
-		 
-		 if (restaurants.getName().equalsIgnoreCase("KFC")) {
-			 List<Restaurants> restaurant = user.getRestaurantsList();
-			 for(Restaurants re : restaurant) {
-				 re.getItems();
-			 }
-			 
-			 itemRepository.saveAll(restaurant);
-		 } else if (restaurants.getName().equalsIgnoreCase("McDonalds")) {
-			 List<Restaurants> restaurant = user.getRestaurantsList();
-			 for(Restaurants re : restaurant) {
-				 re.getItems();
-			 }
-			 
-			 itemRepository.saveAll(restaurant);
-		 } else if (restaurants.getName().equalsIgnoreCase("Spur")) {
-			 List<Restaurants> restaurant = user.getRestaurantsList();
-			 for(Restaurants re : restaurant) {
-				 re.getItems();
-			 }
-			 
-			 itemRepository.saveAll(restaurant);
-		 } else if (restaurants.getName().equalsIgnoreCase("Brocka")) {
-			 List<Restaurants> restaurant = user.getRestaurantsList();
-			 for(Restaurants re : restaurant) {
-				 re.getItems();
-			 }
-			 
-			 itemRepository.saveAll(restaurant);
-		 }
-
+		 restaurants = user.getRestaurantsList();
 	}
 
 }

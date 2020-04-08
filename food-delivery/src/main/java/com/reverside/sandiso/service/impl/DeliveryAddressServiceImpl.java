@@ -3,7 +3,6 @@ package com.reverside.sandiso.service.impl;
 import com.reverside.sandiso.model.DeliveryAddress;
 import com.reverside.sandiso.repository.DeliveryAddressRepository;
 import com.reverside.sandiso.service.DeliveryAddressService;
-import com.reverside.sandiso.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,8 +13,6 @@ import java.util.stream.Collectors;
 @Service
 public class DeliveryAddressServiceImpl implements DeliveryAddressService {
 
-    @Autowired
-    private UserService userService;
     @Autowired
     private DeliveryAddressRepository addressRepository;
 

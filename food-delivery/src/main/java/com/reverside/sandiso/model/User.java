@@ -36,6 +36,9 @@ public class User implements UserDetails {
 	
 	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Restaurants> restaurantsList;
+	
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<Item> itemList;
 
 	private boolean enabled = true;
 	private String  role;
@@ -94,6 +97,14 @@ public class User implements UserDetails {
 
 	public void setRestaurantsList(List<Restaurants> restaurantsList) {
 		this.restaurantsList = restaurantsList;
+	}
+
+	public List<Item> getItemList() {
+		return itemList;
+	}
+
+	public void setItemList(List<Item> itemList) {
+		this.itemList = itemList;
 	}
 
 	public String getRole() {

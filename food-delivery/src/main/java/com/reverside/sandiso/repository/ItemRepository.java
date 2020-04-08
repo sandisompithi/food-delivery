@@ -11,5 +11,5 @@ public interface ItemRepository extends JpaRepository<Item, Long>{
 	
 	List<Item> findAll();
 	Item findByItemId(Long id);
-	void saveAll(List<Restaurants> restaurant);
+	void save(List<Restaurants> restaurant);
 }
