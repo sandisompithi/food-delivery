@@ -53,6 +53,9 @@ public class AdminController {
     	User user = userService.findByUsername(principal.getName());
     	model.addAttribute("user", user);
     	
+    	Item item = new Item();
+    	model.addAttribute("item", item);
+    	
     	return "addItem";
     }
     
