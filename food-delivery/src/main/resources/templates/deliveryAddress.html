@@ -17,18 +17,11 @@
 			<span class="helper"></span>
 			<div>
 				<div class="popupCloseButton">&times;</div>
-				<p>
-					<span style="color: red;">Under construction</span>
-					<hr>
-					Product description from a restaurant
-					<hr>
-					Product description from a restaurant
-					<hr>
-					Product description from a restaurant
-					<hr>
-					Product description from a restaurant
-					<hr>
+				<p data-th-each="eachItem : ${itemList}">
+					<span style="color: red;" data-th-text="${eachItem.itemName}">...</span>
+					<span style="color: red;" data-th-text="${eachItem.price}">...</span>
 				</p>
+				<hr>
 			</div>
 		</div>
 	</div>

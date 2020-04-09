@@ -4,6 +4,7 @@ import java.security.Principal;
 import java.util.List;
 
 import com.reverside.sandiso.model.DeliveryAddress;
+import com.reverside.sandiso.model.Item;
 import com.reverside.sandiso.model.Restaurants;
 import com.reverside.sandiso.model.User;
 
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.reverside.sandiso.service.DeliveryAddressService;
+import com.reverside.sandiso.service.ItemService;
 import com.reverside.sandiso.service.RestaurantService;
 import com.reverside.sandiso.service.UserService;
 
@@ -32,6 +34,9 @@ public class HomeController {
 	
 	@Autowired 
 	private RestaurantService restaurantService;
+	
+	@Autowired
+	private ItemService itemService;
 
 	@GetMapping(value = "/")
 	public String home() {
@@ -96,13 +101,18 @@ public class HomeController {
 		model.addAttribute("addressList", addressList);
 		
 		List<Object[]> restaurantsList = restaurantService.getRestaurantBySuburb(principal.getName());
-
-		
 		model.addAttribute("restaurantsList", restaurantsList);
-
+		
+		for (Object[] res : restaurantsList) {  
+			List<Item> itemList = itemService.getAllItems(principal); 
+			if (res[0] != null) {
+				model.addAttribute("itemList", itemList); 
+			} 
+		}
+		
 		return "deliveryAddress";
 	}
-
+	 
     @GetMapping(value = "/admin/restaurant")
     public String restaurant(Model model, Principal principal) {
         User user = userService.findByUsername(principal.getName());

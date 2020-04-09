@@ -8,8 +8,6 @@ import com.reverside.sandiso.model.Item;
 public interface ItemService {
 
 	Item saveItem(Item item);
-	List<Item> getAllItems();
+	List<Item> getAllItems(Principal principal);
 	Item findItemById(Long id);
-	
-	List<?> displayItemPerRestaurant(Principal principal);
 }
