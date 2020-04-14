@@ -9,7 +9,7 @@
 	<div class="row">
 		
 		<div data-th-each="eachRestaurants : ${restaurantsList}">
-			<a data-th-text="${eachRestaurants[0]}" class="trigger_popup_fricc">...</a>
+			<a data-th-text="@{name=}+${eachRestaurants[0]}" class="trigger_popup_fricc">...</a>
 			<span data-th-text="${eachRestaurants[1]}">...</span>
 		</div>
 

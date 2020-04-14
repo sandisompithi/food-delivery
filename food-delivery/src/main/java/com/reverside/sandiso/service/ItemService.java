@@ -9,5 +9,5 @@ public interface ItemService {
 
 	Item saveItem(Item item);
 	List<Item> getAllItems(Principal principal);
-	Item findItemById(Long id);
+	Item findByRestaurantName(String name);
 }

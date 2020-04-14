@@ -12,6 +12,7 @@ import com.reverside.sandiso.model.Restaurants;
 import com.reverside.sandiso.repository.ItemRepository;
 import com.reverside.sandiso.service.ItemService;
 import com.reverside.sandiso.service.RestaurantService;
+import com.reverside.sandiso.service.UserService;
 
 @Service
 public class ItemServiceImpl implements ItemService {
@@ -19,9 +20,6 @@ public class ItemServiceImpl implements ItemService {
 	@Autowired
 	private ItemRepository itemRepository;
 	
-	@Autowired
-	private RestaurantService restaurantService; 
-
 	@Override
 	public Item saveItem(Item item) {
 		return itemRepository.save(item);
@@ -37,8 +35,8 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	@Override
-	public Item findItemById(Long id) {
-		return itemRepository.findByItemId(id);
-	}	
+	public Item findByRestaurantName(String name) {
+		return itemRepository.findByRestaurantName(name);
+	}
 
 }

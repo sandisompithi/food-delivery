@@ -95,7 +95,8 @@ public class HomeController {
 	}
 
 	@GetMapping(value = "/deliveryAddress")
-	public String restaurants(Principal principal, Model model) {
+	public String restaurants(Principal principal, Model model,
+						@RequestParam(value = "name") String name) {
 
 		List<DeliveryAddress> addressList = addressService.findDeliveryAddressList(principal);
 		model.addAttribute("addressList", addressList);
@@ -103,11 +104,20 @@ public class HomeController {
 		List<Object[]> restaurantsList = restaurantService.getRestaurantBySuburb(principal.getName());
 		model.addAttribute("restaurantsList", restaurantsList);
 		
-		for (Object[] res : restaurantsList) {  
+		Restaurants restaurant = restaurantService.findRestaurant(name);
+		
+		if (restaurant.getName().equalsIgnoreCase("KFC")) {
 			List<Item> itemList = itemService.getAllItems(principal); 
-			if (res[0] != null) {
-				model.addAttribute("itemList", itemList); 
-			} 
+			model.addAttribute("itemList", itemList);
+		} else if (restaurant.getName().equalsIgnoreCase("McDonalds")) {
+			List<Item> itemList = itemService.getAllItems(principal); 
+			model.addAttribute("itemList", itemList);
+		} else if (restaurant.getName().equalsIgnoreCase("Spur")) {
+			List<Item> itemList = itemService.getAllItems(principal); 
+			model.addAttribute("itemList", itemList);
+		} else if (restaurant.getName().equalsIgnoreCase("Rocco Mamas")) {
+			List<Item> itemList = itemService.getAllItems(principal); 
+			model.addAttribute("itemList", itemList);
 		}
 		
 		return "deliveryAddress";

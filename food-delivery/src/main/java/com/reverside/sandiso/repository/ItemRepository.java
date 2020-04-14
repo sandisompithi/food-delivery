@@ -10,6 +10,6 @@ import com.reverside.sandiso.model.Restaurants;
 public interface ItemRepository extends JpaRepository<Item, Long>{
 	
 	List<Item> findAll();
-	Item findByItemId(Long id);
+	Item findByRestaurantName(String name);
 	void save(List<Restaurants> restaurant);
 }
