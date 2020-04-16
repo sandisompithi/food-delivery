@@ -23,18 +23,18 @@ import com.reverside.sandiso.service.UserService;
 
 @Controller
 public class HomeController {
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 
 	@Autowired
 	private UserService userService;
-	
+
 	@Autowired
 	private DeliveryAddressService addressService;
-	
-	@Autowired 
+
+	@Autowired
 	private RestaurantService restaurantService;
-	
+
 	@Autowired
 	private ItemService itemService;
 
@@ -76,17 +76,17 @@ public class HomeController {
 		User user = userService.findByUsername(principal.getName());
 
 		model.addAttribute("user", user);
-		
+
 		DeliveryAddress deliveryAddress = new DeliveryAddress();
 
 		model.addAttribute("deliveryAddress", deliveryAddress);
 
 		return "fooddelivery";
 	}
-	
+
 	@PostMapping(value = "/deliveryAddress")
 	public String deliveryAddressPost(@ModelAttribute("deliveryAddress") DeliveryAddress deliveryAddress,
-									  Principal principal) {
+			Principal principal) {
 		User user = userService.findByUsername(principal.getName());
 		deliveryAddress.setUser(user);
 		addressService.saveDeliveryAddress(deliveryAddress);
@@ -95,57 +95,60 @@ public class HomeController {
 	}
 
 	@GetMapping(value = "/deliveryAddress")
-	public String restaurants(Principal principal, Model model,
-						@RequestParam(value = "name") String name) {
+	public String restaurants(Principal principal, Model model) {
 
 		List<DeliveryAddress> addressList = addressService.findDeliveryAddressList(principal);
 		model.addAttribute("addressList", addressList);
-		
+
 		List<Object[]> restaurantsList = restaurantService.getRestaurantBySuburb(principal.getName());
 		model.addAttribute("restaurantsList", restaurantsList);
-		
+
 		List<Item> itemList = itemService.getAllItems(principal);
-		
-		for(Object[] restaurantName : restaurantsList) {
-			if(restaurantName[0].equals(itemService.findByRestaurantName(name))) {
+
+		for (Object[] restaurantName : restaurantsList) {
+			if (restaurantName[0].equals("KFC")) {
 				model.addAttribute("itemList", itemList);
-			}
+			} else if (restaurantName[0].equals("Spur")) {
+				model.addAttribute("itemList", itemList);
+			} else if (restaurantName[0].equals("Rocco Mamas")) {
+				model.addAttribute("itemList", itemList);
+			} 
 		}
-		
+
 		return "deliveryAddress";
 	}
-	 
-    @GetMapping(value = "/admin/restaurant")
-    public String restaurant(Model model, Principal principal) {
-        User user = userService.findByUsername(principal.getName());
-        model.addAttribute("user", user);
 
-        Restaurants restaurants = new Restaurants();
-        model.addAttribute("restaurants", restaurants);
+	@GetMapping(value = "/admin/restaurant")
+	public String restaurant(Model model, Principal principal) {
+		User user = userService.findByUsername(principal.getName());
+		model.addAttribute("user", user);
 
-        return "restaurant";
-    }
+		Restaurants restaurants = new Restaurants();
+		model.addAttribute("restaurants", restaurants);
 
-    @PostMapping(value = "/admin/restaurant")
-    public String restaurantPost(@ModelAttribute("restaurant") Restaurants restaurants, Principal principal,
-    								@RequestParam("name") String name, @RequestParam("file") MultipartFile file) {
-    	
-        User user = userService.findByUsername(principal.getName());
-		
-        try {
+		return "restaurant";
+	}
+
+	@PostMapping(value = "/admin/restaurant")
+	public String restaurantPost(@ModelAttribute("restaurant") Restaurants restaurants, Principal principal,
+			@RequestParam("name") String name, @RequestParam("file") MultipartFile file) {
+
+		User user = userService.findByUsername(principal.getName());
+
+		try {
 			logger.info("Name= ", name);
-			
+
 			byte[] image = file.getBytes();
-			
+
 			restaurants.setImage(image);
 			restaurants.setUser(user);
-	        restaurantService.saveRestaurant(restaurants);
-	        return "redirect:/admin/restaurant";
-			
+			restaurantService.saveRestaurant(restaurants);
+			return "redirect:/admin/restaurant";
+
 		} catch (Exception e) {
 			logger.error("ERROR", e);
 			return null;
 		}
-        
-    }
+
+	}
 }

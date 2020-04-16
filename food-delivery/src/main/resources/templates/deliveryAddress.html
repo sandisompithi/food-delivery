@@ -5,11 +5,14 @@
 	data-target=".navbar-fixed-top">
 <head th:replace="common/header :: navbar" />
 <div class="container">
-	<h3>List of Restaurants</h3>
+	<div data-th-each="eachAddress : ${addressList}">
+		<h1 class="list_restaurants" 
+			data-th-text="${eachAddress.streetName}+', '+${eachAddress.suburb}+', '+${eachAddress.postalCode}">...</h1>
+	</div>
 	<div class="row">
-		
+
 		<div data-th-each="eachRestaurants : ${restaurantsList}">
-			<a data-th-text="@{/deliveryAddress?name=}+${eachRestaurants[0]}" class="trigger_popup_fricc">...</a>
+			<a data-th-text="${eachRestaurants[0]}" class="trigger_popup_fricc">...</a>
 			<span data-th-text="${eachRestaurants[1]}">...</span>
 		</div>
 
@@ -18,10 +21,10 @@
 			<div>
 				<div class="popupCloseButton">&times;</div>
 				<p data-th-each="eachItem : ${itemList}">
+					<span style="color: red;" data-th-text="${eachItem.restaurantName}">...</span><br>
 					<span style="color: red;" data-th-text="${eachItem.itemName}">...</span>
-					<span style="color: red;" data-th-text="${eachItem.price}">...</span>
+					R <span style="color: red;" data-th-text="${eachItem.price}">...</span><br><br>
 				</p>
-				<hr>
 			</div>
 		</div>
 	</div>
