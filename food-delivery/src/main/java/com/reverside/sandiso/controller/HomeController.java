@@ -100,21 +100,13 @@ public class HomeController {
 		List<DeliveryAddress> addressList = addressService.findDeliveryAddressList(principal);
 		model.addAttribute("addressList", addressList);
 
-		List<Object[]> restaurantsList = restaurantService.getRestaurantBySuburb(principal.getName());
+		List<Restaurants> restaurantsList = restaurantService.getRestaurantBySuburb(principal);
 		model.addAttribute("restaurantsList", restaurantsList);
 
 		List<Item> itemList = itemService.getAllItems(principal);
+		model.addAttribute("itemList", itemList);
 
-		for (Object[] restaurantName : restaurantsList) {
-			if (restaurantName[0].equals("KFC")) {
-				model.addAttribute("itemList", itemList);
-			} else if (restaurantName[0].equals("Spur")) {
-				model.addAttribute("itemList", itemList);
-			} else if (restaurantName[0].equals("Rocco Mamas")) {
-				model.addAttribute("itemList", itemList);
-			} 
-		}
-
+		
 		return "deliveryAddress";
 	}
 
