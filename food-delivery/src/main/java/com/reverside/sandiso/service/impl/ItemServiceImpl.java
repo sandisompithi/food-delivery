@@ -38,5 +38,7 @@ public class ItemServiceImpl implements ItemService {
 	public Item findByRestaurantName(String name) {
 		return itemRepository.findByRestaurantName(name);
 	}
+	
+	
 
 }
