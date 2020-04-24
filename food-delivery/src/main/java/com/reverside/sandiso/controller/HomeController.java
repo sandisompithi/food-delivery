@@ -103,7 +103,7 @@ public class HomeController {
 		List<Object[]> restaurantsList = restaurantService.getRestaurantBySuburb(principal.getName());
 		model.addAttribute("restaurantsList", restaurantsList);
 		
-		List<Item> itemList = itemService.getAllItems(principal);
+		List<Object[]> itemList = itemService.getAllItems(principal);
 		model.addAttribute("itemList", itemList);
 
 		return "deliveryAddress";

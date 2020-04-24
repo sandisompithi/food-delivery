@@ -10,9 +10,6 @@ import com.reverside.sandiso.model.Restaurants;
 
 public interface ItemRepository extends JpaRepository<Item, Long>{
 	
-	@Query("Select i.restaurantName, i.itemName, i.price"
-			+ " From Item i Inner Join Restaurants r"
-			+ " On r.name = i.restaurantName")
 	List<Item> findAll();
 	Item findByRestaurantName(String name);
 	void save(List<Restaurants> restaurant);
