@@ -41,38 +41,28 @@ public class ItemServiceImpl implements ItemService {
 	@Override
 	public List<Object[]> getAllItems(Principal principal) {
 		
-		User username = userService.findByUsername(principal.getName());
-		
-		if(username.equals(null)) {
-			return null;
-		} else {
-			
-			List<Object[]> restaurantList = restaurantService.getRestaurantBySuburb(principal.getName());
-			
-
-			
-			EntityManager em = emf.createEntityManager();
-			em.getTransaction().begin();
-			
-			String restName = "";
-			for(Object[] re : restaurantList) {
-				restName = re[0].toString();
-				System.out.println(restName);
-				Query query = em.createQuery("Select i.restaurantName, i.itemName, i.price"
-						+ " From Item i Inner Join Restaurants r"
-							+ " On r.name = i.restaurantName"
-							+ " Where r.name = " + restName);
-				List<Object[]> list = query.getResultList();
-				
-				for(Object[] res : list) {
-					System.out.println(res[0] + " " + res[1] + " " + res[2]);
-				}
-				
-				return list;
-				
-			}
-			
+		List<Object[]> ddd = restaurantService.getRestaurantBySuburb(principal.getName());
+		Object ee = null;
+		for (Object[] ff : ddd) {
+			ee = ff[0];
 		}
+		System.out.println("The name is " + ee);
+		
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		
+		Query query = em.createQuery("Select r.name, i.itemName, i.price from Item i "
+				+ "join Restaurants r on i.restaurantName = r.name "
+					+ "join DeliveryAddress d on r.city = d.suburb "
+				+ " where r.name = " + ee
+					+ " Group by i.itemName " + " i.itemName");
+		List<Object[]> list = query.getResultList();
+		
+		for(Object[] res : list) {
+			System.out.println(res[0] + " " + res[1] + " " + res[2]);
+		}
+		
+		return list;
 	}
 
 	@Override
