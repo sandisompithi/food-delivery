@@ -30,13 +30,10 @@ public class HomeController {
 	private UserService userService;
 
 	@Autowired
-	private DeliveryAddressService addressService;
-
-	@Autowired
 	private RestaurantService restaurantService;
-
+	
 	@Autowired
-	private ItemService itemService;
+	private DeliveryAddressService addressService;
 
 	@GetMapping(value = "/")
 	public String home() {
@@ -83,31 +80,7 @@ public class HomeController {
 
 		return "fooddelivery";
 	}
-
-	@PostMapping(value = "/deliveryAddress")
-	public String deliveryAddressPost(@ModelAttribute("deliveryAddress") DeliveryAddress deliveryAddress,
-			Principal principal) {
-		User user = userService.findByUsername(principal.getName());
-		deliveryAddress.setUser(user);
-		addressService.saveDeliveryAddress(deliveryAddress);
-
-		return "redirect:/deliveryAddress";
-	}
-
-	@GetMapping(value = "/deliveryAddress")
-	public String restaurants(Principal principal, Model model) {
-
-		List<DeliveryAddress> addressList = addressService.findDeliveryAddressList(principal);
-		model.addAttribute("addressList", addressList);
-
-		List<Object[]> restaurantsList = restaurantService.getRestaurantBySuburb(principal.getName());
-		model.addAttribute("restaurantsList", restaurantsList);
-		
-		List<Object[]> itemList = itemService.getAllItems(principal);
-		model.addAttribute("itemList", itemList);
-
-		return "deliveryAddress";
-	}
+	
 
 	@GetMapping(value = "/admin/restaurant")
 	public String restaurant(Model model, Principal principal) {

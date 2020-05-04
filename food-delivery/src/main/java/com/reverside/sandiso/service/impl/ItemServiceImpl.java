@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.reverside.sandiso.model.Item;
+import com.reverside.sandiso.model.Restaurants;
 import com.reverside.sandiso.model.User;
 import com.reverside.sandiso.repository.ItemRepository;
 import com.reverside.sandiso.service.ItemService;
@@ -41,21 +42,13 @@ public class ItemServiceImpl implements ItemService {
 	@Override
 	public List<Object[]> getAllItems(Principal principal) {
 		
-		List<Object[]> ddd = restaurantService.getRestaurantBySuburb(principal.getName());
-		Object ee = null;
-		for (Object[] ff : ddd) {
-			ee = ff[0];
-		}
-		System.out.println("The name is " + ee);
-		
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
 		
 		Query query = em.createQuery("Select r.name, i.itemName, i.price from Item i "
 				+ "join Restaurants r on i.restaurantName = r.name "
 					+ "join DeliveryAddress d on r.city = d.suburb "
-				+ " where r.name = " + ee
-					+ " Group by i.itemName " + " i.itemName");
+				+ " Group by i.itemName " + "Order by i.itemName");
 		List<Object[]> list = query.getResultList();
 		
 		for(Object[] res : list) {

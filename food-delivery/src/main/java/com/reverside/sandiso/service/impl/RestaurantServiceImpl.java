@@ -64,7 +64,7 @@ public class RestaurantServiceImpl implements RestaurantService {
 
 	public List<Object[]> getRestaurantBySuburb(String username) { 
 		User user = userService.findByUsername(username);
-	 
+		
 		if (user != null) { 
 			EntityManager em = emf.createEntityManager();
 			em.getTransaction().begin();
