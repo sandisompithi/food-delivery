@@ -29,12 +29,6 @@ public class HomeController {
 	@Autowired
 	private UserService userService;
 
-	@Autowired
-	private RestaurantService restaurantService;
-	
-	@Autowired
-	private DeliveryAddressService addressService;
-
 	@GetMapping(value = "/")
 	public String home() {
 		return "redirect:/index";
@@ -81,38 +75,4 @@ public class HomeController {
 		return "fooddelivery";
 	}
 	
-
-	@GetMapping(value = "/admin/restaurant")
-	public String restaurant(Model model, Principal principal) {
-		User user = userService.findByUsername(principal.getName());
-		model.addAttribute("user", user);
-
-		Restaurants restaurants = new Restaurants();
-		model.addAttribute("restaurants", restaurants);
-
-		return "restaurant";
-	}
-
-	@PostMapping(value = "/admin/restaurant")
-	public String restaurantPost(@ModelAttribute("restaurant") Restaurants restaurants, Principal principal,
-			@RequestParam("name") String name, @RequestParam("file") MultipartFile file) {
-
-		User user = userService.findByUsername(principal.getName());
-
-		try {
-			logger.info("Name= ", name);
-
-			byte[] image = file.getBytes();
-
-			restaurants.setImage(image);
-			restaurants.setUser(user);
-			restaurantService.saveRestaurant(restaurants);
-			return "redirect:/admin/restaurant";
-
-		} catch (Exception e) {
-			logger.error("ERROR", e);
-			return null;
-		}
-
-	}
 }
