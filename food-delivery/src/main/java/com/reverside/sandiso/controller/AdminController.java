@@ -2,8 +2,6 @@ package com.reverside.sandiso.controller;
 
 import java.security.Principal;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,8 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.reverside.sandiso.model.Item;
 import com.reverside.sandiso.model.Restaurants;
@@ -25,8 +21,6 @@ import com.reverside.sandiso.service.UserService;
 @RequestMapping("admin")
 public class AdminController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
- 
 	@Autowired
 	private UserService userService;
 	
@@ -52,7 +46,7 @@ public class AdminController {
 
         model.addAttribute("user", user);
 
-        return "register";
+        return "admin/register";
     }
 
     @PostMapping(value = "/register")
@@ -77,29 +71,17 @@ public class AdminController {
 		Restaurants restaurants = new Restaurants();
 		model.addAttribute("restaurants", restaurants);
 
-		return "restaurant";
+		return "admin/restaurant";
 	}
 
 	@PostMapping(value = "/restaurant")
-	public String restaurantPost(@ModelAttribute("restaurant") Restaurants restaurants, Principal principal,
-			@RequestParam("name") String name, @RequestParam("file") MultipartFile file) {
+	public String restaurantPost(@ModelAttribute("restaurant") Restaurants restaurants, Principal principal) {
 
 		User user = userService.findByUsername(principal.getName());
 
-		try {
-			logger.info("Name= ", name);
-
-			byte[] image = file.getBytes();
-
-			restaurants.setImage(image);
-			restaurants.setUser(user);
-			restaurantService.saveRestaurant(restaurants);
-			return "redirect:/admin/restaurant";
-
-		} catch (Exception e) {
-			logger.error("ERROR", e);
-			return null;
-		}
+		restaurants.setUser(user);
+		restaurantService.saveRestaurant(restaurants);
+		return "redirect:/admin/restaurant";
 
 	}
     
@@ -111,7 +93,7 @@ public class AdminController {
     	Item item = new Item();
     	model.addAttribute("item", item);
     	
-    	return "addItem";
+    	return "admin/addItem";
     }
     
     

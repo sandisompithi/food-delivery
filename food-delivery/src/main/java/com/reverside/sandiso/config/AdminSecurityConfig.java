@@ -37,7 +37,7 @@ public class AdminSecurityConfig extends WebSecurityConfigurerAdapter {
 		// antMatchers("/**").
 				antMatchers(PUBLIC_MATCHER_STRINGS).permitAll().anyRequest().authenticated();
 
-		http.csrf().disable().cors().disable().formLogin().failureUrl("/admin/index?error").defaultSuccessUrl("/admin/restaurants")
+		http.csrf().disable().cors().disable().formLogin().failureUrl("/admin/index?error").defaultSuccessUrl("/admin/restaurant")
 				.loginPage("/admin/index").permitAll().and().logout()
 				.logoutRequestMatcher(new AntPathRequestMatcher("/admin/logout")).logoutSuccessUrl("/admin/index?logout")
 				.deleteCookies("remember-me").permitAll().and().rememberMe();

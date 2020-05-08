@@ -13,10 +13,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.reverside.sandiso.model.DeliveryAddress;
 import com.reverside.sandiso.model.Restaurants;
 import com.reverside.sandiso.model.User;
-import com.reverside.sandiso.repository.DeliveryAddressRepository;
 import com.reverside.sandiso.repository.RestaurantRepository;
 import com.reverside.sandiso.service.RestaurantService;
 import com.reverside.sandiso.service.UserService;
@@ -28,9 +26,6 @@ public class RestaurantServiceImpl implements RestaurantService {
 
 	@Autowired
 	private RestaurantRepository restaurantRepository;
-
-	@Autowired
-	private DeliveryAddressRepository deliveryAddressRepo;
 
 	@Autowired
 	private UserService userService;
