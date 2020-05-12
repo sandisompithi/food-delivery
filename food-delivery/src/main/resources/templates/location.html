@@ -11,10 +11,13 @@
 	</div>
 	<div class="row">
 
-		<div data-th-each="eachRestaurants : ${restaurantsList}">
-			<a data-th-text="${eachRestaurants[0]}" class="trigger_popup_fricc">...</a>
-			<span data-th-text="${eachRestaurants[1]}">...</span>
+		<div class="section group" data-th-each="eachRestaurants : ${restaurantsList}">
+			<div class="col span_1_of_2"><a data-th-text="${eachRestaurants[0]}" class="trigger_popup_fricc">...</a></div>
+			<div class="col span_1_of_2"><span data-th-text="${eachRestaurants[1]}">...</span></div>
+		</div>
 
+		<div >
+			
 			<div class="hover_bkgr_fricc">
 				<span class="helper"></span>
 				<div>

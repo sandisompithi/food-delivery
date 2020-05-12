@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.reverside.sandiso.model.DeliveryAddress;
+import com.reverside.sandiso.model.Restaurants;
 import com.reverside.sandiso.model.User;
 import com.reverside.sandiso.service.DeliveryAddressService;
 import com.reverside.sandiso.service.ItemService;
@@ -53,18 +54,8 @@ public class RestaurantsController {
 		List<Object[]> restaurantsList = restaurantService.getRestaurantBySuburb(principal.getName());
 		model.addAttribute("restaurantsList", restaurantsList);
 		
-		for (Object[] rrr : restaurantsList) {
-			System.out.println(rrr[0].equals("KFC"));
-			if (rrr[0].equals("KFC")) {
-				List<Object[]> itemList = itemService.getAllItems(principal);
-				model.addAttribute("itemList", itemList);
-				break;
-			} else if (rrr[0].equals("McDonalds")) {
-				List<Object[]> itemList = itemService.getAllItems(principal);
-				model.addAttribute("itemList", itemList);
-				break;
-			}
-		}
+		List<Object[]> itemList = itemService.getAllItems(principal);
+		model.addAttribute("itemList", itemList);
 
 		return "location";
 	}
