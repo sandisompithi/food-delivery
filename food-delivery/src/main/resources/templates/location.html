@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head th:replace="common/header :: common-header" />
-<body roleId="page-top" data-spy="scroll"
-	data-target=".navbar-fixed-top">
 <head th:replace="common/header :: navbar" />
 <div class="container">
 	<div data-th-each="eachAddress : ${addressList}">
@@ -12,28 +10,12 @@
 	<div class="row">
 
 		<div class="section group" data-th-each="eachRestaurants : ${restaurantsList}">
-			<div class="col span_1_of_2"><a data-th-text="${eachRestaurants[0]}" class="trigger_popup_fricc">...</a></div>
+			<div class="col span_1_of_2"><a data-th-text="@{/restaurants/items}+${eachRestaurants[0]}">...</a></div>
 			<div class="col span_1_of_2"><span data-th-text="${eachRestaurants[1]}">...</span></div>
-		</div>
-
-		<div >
-			
-			<div class="hover_bkgr_fricc">
-				<span class="helper"></span>
-				<div>
-					<div class="popupCloseButton">&times;</div>
-					<p data-th-each="eachItem : ${itemList}">
-						<span style="color: red;" data-th-text="${eachItem[0]}">...</span><br>
-						<span style="color: red;" data-th-text="${eachItem[1]}">...</span>
-						R <span style="color: red;" data-th-text="${eachItem[2]}">...</span><br>
-						<br>
-					</p>
-				</div>
-			</div>
 		</div>
 	</div>
 </div>
-<div th:replace="common/header :: body-bottom-scripts" />
+<div th:replace="common/header :: body-bottom-scripts"></div>
 
 </body>
 </html>

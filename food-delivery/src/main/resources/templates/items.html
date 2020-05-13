@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="common/header :: common-header" />
+<body roleId="page-top" data-spy="scroll"
+	data-target=".navbar-fixed-top">
+<head th:replace="common/header :: navbar" />
+<div class="container">
+	<div class="row">
+	
+		<div class="trigger_popup_fricc">
+			<h1>Items</h1>
+		</div>
+		<div class="hover_bkgr_fricc">
+			<span class="helper"></span>
+			<div>
+				<div class="popupCloseButton">&times;</div>
+				<p data-th-each="eachItem : ${itemList}">
+					<span style="color: red;" data-th-text="${eachItem[0]}">...</span><br>
+					<span style="color: red;" data-th-text="${eachItem[1]}">...</span>
+					R <span style="color: red;" data-th-text="${eachItem[2]}">...</span><br>
+					<br>
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+<div th:replace="common/header :: body-bottom-scripts" />
+
+</body>
+</html>

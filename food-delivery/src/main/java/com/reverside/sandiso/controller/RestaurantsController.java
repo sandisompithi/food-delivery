@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.reverside.sandiso.model.DeliveryAddress;
-import com.reverside.sandiso.model.Restaurants;
 import com.reverside.sandiso.model.User;
 import com.reverside.sandiso.service.DeliveryAddressService;
 import com.reverside.sandiso.service.ItemService;
@@ -53,9 +52,6 @@ public class RestaurantsController {
 
 		List<Object[]> restaurantsList = restaurantService.getRestaurantBySuburb(principal.getName());
 		model.addAttribute("restaurantsList", restaurantsList);
-		
-		List<Object[]> itemList = itemService.getAllItems(principal);
-		model.addAttribute("itemList", itemList);
 
 		return "location";
 	}
