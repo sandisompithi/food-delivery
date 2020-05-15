@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head th:replace="common/header :: common-header" />
-<body roleId="page-top" data-spy="scroll"
-      data-target=".navbar-fixed-top">
-<!--<head th:replace="common/header :: navbar" />-->
 <div class="container">
     <div class="row main">
         <div class="panel-heading">
@@ -23,7 +20,7 @@
 								<span class="input-group-addon"><i class="fa fa-user fa"
                                                                    aria-hidden="true"></i></span> <input type="text" class="form-control"
                                                                                                          th:value="${user.firstname}" id="firstname" name="firstname"
-                                                                                                         roleId="firstname" placeholder="Enter your first name"
+                                                                                                         placeholder="Enter your first name"
                                                                                                          required="required" />
                         </div>
                     </div>
@@ -37,7 +34,7 @@
 								<span class="input-group-addon"><i class="fa fa-user fa"
                                                                    aria-hidden="true"></i></span> <input type="text" class="form-control"
                                                                                                          th:value="${user.surname}" id="surname" name="surname"
-                                                                                                         roleId="surname" placeholder="Enter your surname"
+                                                                                                         placeholder="Enter your surname"
                                                                                                          required="required" />
                         </div>
                     </div>
@@ -49,7 +46,7 @@
                         <div class="input-group">
 								<span class="input-group-addon"><i class="fa fa-phone fa"
                                                                    aria-hidden="true"></i></span> <input type="text" class="form-control"
-                                                                                                         th:value="${user.cellphone}" id="cellphone" name="cellphone" roleId="cellphone"
+                                                                                                         th:value="${user.cellphone}" id="cellphone" name="cellphone"
                                                                                                          placeholder="xxx-xxx-xxxx" required="required" />
                         </div>
                     </div>
@@ -64,7 +61,7 @@
 								<span class="input-group-addon"><i class="fa fa-users fa"
                                                                    aria-hidden="true"></i></span> <input type="text" class="form-control"
                                                                                                          th:value="${user.username}" id="username" name="username"
-                                                                                                         roleId="username" placeholder="Enter your Username"
+                                                                                                         placeholder="Enter your Username"
                                                                                                          required="required" />
                         </div>
                     </div>
@@ -78,7 +75,7 @@
                                         class="fa fa-lock fa-lg" aria-hidden="true"></i></span> <input
                                 type="password" class="form-control"
                                 th:value="${user.password}" id="password" name="password"
-                                roleId="password" placeholder="Enter your Password"
+                                placeholder="Enter your Password"
                                 required="required" />
                         </div>
                         <div class="checkbox">
@@ -117,7 +114,7 @@
 </div>
 
 
-<div th:replace="common/header :: body-bottom-scripts" />
+<div th:replace="common/header :: body-bottom-scripts"></div>
 
 </body>
 </html>
