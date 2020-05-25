@@ -53,7 +53,7 @@ public class ItemServiceImpl implements ItemService {
 						+ "join Restaurants r on i.restaurantName = r.name "
 						+ "join DeliveryAddress d on r.city = d.suburb "  
 						+ "join User u on d.user = u.id where u.id = "
-						+ user.getId()
+						+ user.getId() + " and r.name = " + ls[0]
 						+ " Group by i.itemName " + "Order by i.itemName");
 				List<Object[]> list = query.getResultList();
 				for (Object[] res : list) {
