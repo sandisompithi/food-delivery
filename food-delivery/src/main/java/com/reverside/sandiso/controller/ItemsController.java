@@ -15,19 +15,19 @@ import com.reverside.sandiso.service.RestaurantService;
 @Controller
 @RequestMapping("/restaurants")
 public class ItemsController {
-	
+
 	@Autowired
 	private RestaurantService restaurantService;
 
 	@Autowired
 	private ItemService itemService;
-	
+
 	@GetMapping(value = "/items")
 	public String restaurants(Principal principal, Model model) {
 
 		List<Object[]> restaurantsList = restaurantService.getRestaurantBySuburb(principal.getName());
 		model.addAttribute("restaurantsList", restaurantsList);
-		
+
 		List<Object[]> itemList = itemService.getAllItems(principal);
 		model.addAttribute("itemList", itemList);
 

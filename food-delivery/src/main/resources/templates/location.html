@@ -3,6 +3,7 @@
 <head th:replace="common/header :: common-header" />
 <head th:replace="common/header :: navbar" />
 <div class="container">
+	<span><a th:href="@{/fooddelivery}">change address</a></span>
 	<div data-th-each="eachAddress : ${addressList}">
 		<h1 class="list_restaurants"
 			data-th-text="${eachAddress.streetName}+', '+${eachAddress.suburb}+', '+${eachAddress.postalCode}">...</h1>

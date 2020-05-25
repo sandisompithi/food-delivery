@@ -8,7 +8,6 @@
 			<hr />
 			<form method="post" th:action="@{/user/profile}">
 				<input type="hidden" name="id" th:value="${user.id}" />
-
 				<div class="form-group">
 					<label for="firstname">First Name</label>
 					<div class="cols-sm-10">
@@ -21,7 +20,6 @@
 						</div>
 					</div>
 				</div>
-
 				<div class="form-group">
 					<label for="lastName" class="cols-sm-2 control-label">Surname</label>
 					<div class="cols-sm-10">
@@ -34,7 +32,6 @@
 						</div>
 					</div>
 				</div>
-
 				<div class="form-group">
 					<label for="cellphone" class="cols-sm-2 control-label">Phone</label>
 					<div class="cols-sm-10">
@@ -56,7 +53,7 @@
 							<span class="input-group-addon"><i class="fa fa-users fa"
 								aria-hidden="true"></i></span> <input type="text" class="form-control"
 								th:value="${user.username}" id="username" name="username"
-								roleId="username" placeholder="Enter your Username"
+								placeholder="Enter your Username"
 								required="required" />
 						</div>
 					</div>

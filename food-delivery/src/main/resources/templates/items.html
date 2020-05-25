@@ -3,8 +3,8 @@
 <head th:replace="common/header :: common-header" />
 <head th:replace="common/header :: navbar" />
 <div class="container">
+	<span><a th:href="@{/restaurants/location}">go to restaurants</a></span>
 	<div class="row">
-
 		<div class="col-sm-3 col-md-6" id="grid-fixed"
 			data-th-each="eachItem : ${itemList}">
 			<h1 class="trigger_popup_fricc">
@@ -20,6 +20,7 @@
 			<div>
 				<div class="popupCloseButton">&times;</div>
 				<form action="#" method="post">
+					
 					<div class="form-group ">
 						<button type="submit" class="btn btn-success btn-block ">Add To Cart</button>
 					</div>
