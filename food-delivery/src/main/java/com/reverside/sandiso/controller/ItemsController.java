@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.reverside.sandiso.service.ItemService;
@@ -22,8 +23,9 @@ public class ItemsController {
 	@Autowired
 	private ItemService itemService;
 
-	@GetMapping(value = "/items")
-	public String restaurants(Principal principal, Model model) {
+	
+	@GetMapping(value = "/items/{name}")
+	public String restaurants(Principal principal, Model model, @PathVariable(value = "name") String name) {
 
 		List<Object[]> restaurantsList = restaurantService.getRestaurantBySuburb(principal.getName());
 		model.addAttribute("restaurantsList", restaurantsList);
