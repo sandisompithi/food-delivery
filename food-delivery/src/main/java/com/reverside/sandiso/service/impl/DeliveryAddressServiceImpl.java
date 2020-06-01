@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -39,4 +40,17 @@ public class DeliveryAddressServiceImpl implements DeliveryAddressService {
     public void deleteBySuburb(String suburb) {
         addressRepository.deleteBySuburb(suburb);
     }
+
+	@Override
+	public DeliveryAddress findById(Long id) {
+		Optional<DeliveryAddress> optional = addressRepository.findById(id);
+		
+		DeliveryAddress address = null;
+		if (optional.isPresent()) {
+			address = optional.get();
+		} else {
+			throw new RuntimeException("Address not found for id :: " + id);
+		}
+		return address;
+	}
 }
