@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -38,6 +39,19 @@ public class RestaurantsController {
 		addressService.saveDeliveryAddress(deliveryAddress);
 
 		return "redirect:/restaurants/location";
+	}
+	
+	@GetMapping(value = "/address/{id}")
+	public String deliveryAddressPut(@PathVariable(value = "id") Long id, Principal principal, Model model) {
+		
+		User user = userService.findByUsername(principal.getName());
+
+		if (user != null) {
+			DeliveryAddress address = addressService.findById(id); 	
+			model.addAttribute("address", address);
+		}
+
+		return "address";
 	}
 
 	@GetMapping(value = "/location")
